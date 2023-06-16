@@ -1,0 +1,33 @@
+name: "Terraform"
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+jobs:
+  terraform:
+    name: "Terraform"
+    runs-on: ubuntu-latest
+    environment: dev
+    permissions:
+      pull-requests: write
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: ${{ env.TF_VERSION }}
+        
+      - name: terraform init
+        run: terraform init
+
+      - name: Plan Terraform changes
+        run: terraform plan -var="access_key={{ secrets.ACCESS_KEY }}" -var="secret_key={{ secrets.SECRET_KEY }}"
+
+      - name: Apply Terraform changes
+        run: terraform apply -auto-approve -var="access_key={{ secrets.ACCESS_KEY }}" -var="secret_key={{ secrets.SECRET_KEY }}"
+
+
+
