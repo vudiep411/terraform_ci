@@ -34,10 +34,10 @@ resource "tls_private_key" "rsa-key" {
   algorithm = "RSA"
   rsa_bits  = 4096
 }
-resource "local_file" "tf-key" {
-  content  = tls_private_key.rsa-key.private_key_pem
-  filename = "${var.key_pair_name}.pem"
-}
+# resource "local_file" "tf-key" {
+#   content  = tls_private_key.rsa-key.private_key_pem
+#   filename = "${var.key_pair_name}.pem"
+# }
 
 # Aws instance
 resource "aws_instance" "my-tf-server" {
