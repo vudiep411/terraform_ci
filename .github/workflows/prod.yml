@@ -2,7 +2,7 @@ name: "Terraform"
 on:
   push:
     branches:
-    - dev
+    - main
   pull_request:
 jobs:
   terraform:
@@ -26,6 +26,8 @@ jobs:
       - name: Plan Terraform changes
         run: terraform plan -var="access_key=${{ secrets.ACCESS_KEY }}" -var="secret_key=${{ secrets.SECRET_KEY }}"
 
+      - name: Apply Terraform changes
+        run: terraform apply -auto-approve -var="access_key=${{ secrets.ACCESS_KEY }}" -var="secret_key=${{ secrets.SECRET_KEY }}"
 
 
 

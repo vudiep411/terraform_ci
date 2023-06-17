@@ -1,1 +1,1 @@
-# key_pair_name="tf-key-pair"
+key_pair_name="tf-key-pair"
