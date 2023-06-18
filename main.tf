@@ -44,6 +44,7 @@ resource "aws_instance" "my-tf-server" {
   ami = "ami-0bd4d695347c0ef88"
   key_name = aws_key_pair.tf-key-pair.key_name
   instance_type = "t2.micro"
+  vpc_security_group_ids = [aws_security_group.vu-sg.id]
   tags = {
     Name= "my-server1"
   }
